@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="css/classlist_style.css"/>
+</head>
+
+<body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+  <!-- Firebase-setup.js -->
+  <script src="js/firebase-setup.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <script>
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  </script>
+  <!-- The surrounding HTML is left untouched by FirebaseUI.
+         Your app may use that space for branding, controls and other customizations.-->
+  <div id="header">
+      <a href="landing_homepage.html"><img src="logo.png" id="logo"></a>
+  </div>
+  <br><br><br><br><br>
+  <div id="firebaseui-auth-container"></div>
+     <table id="icons">
+        <tr>
+            <th>
+                <a href="profile.html"><img class="icon" id="icon1" src="icon1.png" ></a>
+            </th>
+            <th>
+                <a href="messaging.html"><img class="icon" id="icon2" src="icon2.png" ></a>
+            </th>
+            <th>
+                <a href="classlist.html"><img class="icon" id="icon3" src="icon3.png" ></a>
+            </th>
+        </tr>
+    </table>
+  <div id="app">
+    <center>
+      <div id="loader">
+        <h2>Classlist</h2>
+      </div>
+      <br><br>
+    </center>
+    <div id="search">
+      <div id="results"></div>
+    </div>
+  </div>
+  <br><br><br>
+  <center>
+    <div id="nav-bottom">
+      <a href="profile.html"><img class="icon" id='icon4' src="icon1.png" width="100px"></a>
+      <a href="messaging.html"><img class="icon" id="icon5" src="icon2.png" width="100px"></a>
+      <a href="classlist.html"><img class="icon" id="icon6" src="icon3.png" width="100px"></a>
+    </div>
+    <br><br><br><br><br>
+  </center>
+  <button id="signout">Signout</button>
+  <br><br><br><br><br><br><br><br><br>
+  <script src="js/classlist_js.js"></script>
+</body>
+
+</html>

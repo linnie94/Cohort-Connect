@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background: #e6f2fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #inputstyle {
+      font-family: Arial;
+      font-size: 14px;
+    }
+
+    div {
+      color: black;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    #header {
+      background: #186191;
+      height: 100px;
+    }
+
+    #logo {
+      width: 80px;
+      position: relative;
+      left: 80px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #app {
+      margin: 0 auto;
+      width: 500px;
+      background-color: white;
+      height: 500px;
+      padding: 25px;
+      border-radius: 25px;
+      overflow: scroll;
+    }
+
+    #icon {
+      padding: 30px;
+    }
+
+    #profile {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      border: 3px solid white;
+      border-radius: 100px;
+      background-position: center center;
+      background-size: cover;
+    }
+
+    #name {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    #signout {
+      font-size: medium;
+      position: absolute;
+      right:40px;
+      top: 60px;
+    }
+
+    input {
+      width: 100px;
+    }
+
+      @media screen and (max-width:800px){
+
+      }
+  </style>
+</head>
+
+<body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+  <script src="js/firebase-setup.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <script>
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  </script>
+  <!-- The surrounding HTML is left untouched by FirebaseUI.
+         Your app may use that space for branding, controls and other customizations.-->
+  <div id="header">
+    <a href="landing_homepage.html"><img src="logo.png" id="logo"></a>
+  </div>
+  <br><br><br><br><br>
+  <div id="firebaseui-auth-container"></div>
+  <div id="app">
+    <h1>Profile</h1>
+    <center>
+        <div id="nameHolder"></div>
+        <h4>Profile Picture</h4>
+        <div id="profilePicture"></div>
+        <input type="text" id="profilePictureChange" placeholder="Enter a link">
+        <br>
+        <h4>Enter up to 4 interests:</h4>
+        <input type="text" id="interest1" placeholder="Enter an interest">
+        <br>
+        <input type="text" id="interest2" placeholder="Enter an interest">
+        <br>
+        <input type="text" id="interest3" placeholder="Enter an interest">
+        <br>
+        <input type="text" id="interest4" placeholder="Enter an interest">
+        <br>
+        <h4>What classes are you taking?</h4>
+        <input type="text" id="classes" placeholder="Enter your classes">
+        <br><font style="font-size:9px; color:gray; font-style: italic;">(Seperate by commas.)</font>
+        <br><br>
+        <button id="update">Update</button>
+    </center>
+  </div>
+  <br><br><br>
+  <center>
+    <div id="footer">
+      <a href="profile.html"><img class="icon" id="icon1" src="icon1.png"></a>
+      <a href="messaging.html"><img class="icon" id="icon2" src="icon2.png"></a>
+      <a href="classlist.html"><img class="icon" id="icon3" src="icon3.png"></a>
+    </div>
+      <div id="nav-bottom">
+          <a href="profile.html"><img class="icon" id="icon4" src="icon1.png"></a>
+          <a href="messaging.html"><img class="icon" id="icon5" src="icon2.png"></a>
+          <a href="classlist.html"><img class="icon" id="icon6" src="icon3.png"></a>
+      </div>
+    <br><br><br><br><br>
+  </center>
+  <button id="signout">Signout</button>
+  <br><br><br><br><br><br><br><br><br>
+  <script>
+    var db = firebase.firestore();
+
+    const appContainer = document.querySelector("#app");
+    const updateProfile = document.querySelector("#update-profile");
+    const int1 = document.querySelector("#interest1");
+    const int2 = document.querySelector("#interest2");
+    const int3 = document.querySelector("#interest3");
+    const int4 = document.querySelector("#interest4");
+    const cls = document.querySelector("#classes");
+    const updateButton = document.querySelector("#update");
+    const nameHolder = document.querySelector("nameHolder");
+    const profilePicture = document.querySelector("#profilePicture");
+    const profilePictureChange = document.querySelector("#profilePictureChange")
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      console.log(user.displayName);
+      console.log(user.email)
+
+      updateButton.addEventListener("click", function() {
+      const docRef2 = toString(user.displayName)
+      const docRef = db.doc("users/" + user.displayName);
+      const interests = [int1.value, int2.value, int3.value, int4.value];
+
+      console.log("I am going to add " + interests + " as a new collection.");
+      docRef.update({
+        pic: profilePictureChange.value,
+        interests: interests,
+        class: cls.value,
+      }).then(function() {
+        console.log("Saved!");
+      }).catch(function (error) {
+        console.log("Caught an error: " + error)
+      })
+    })
+    })
+    //making sign out button
+    function signout() {
+      document.getElementById("signout").onclick = () => {
+        firebase.auth().signOut().then(function () {
+          console.log("user signed out")
+          window.location.href = "index.html"
+        }).catch(function (error) {
+          console.log("error")
+        })
+      }
+    }
+    signout();
+  </script>
+</body>
+
+</html>

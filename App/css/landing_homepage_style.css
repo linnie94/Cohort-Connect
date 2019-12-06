@@ -1,0 +1,117 @@
+body {
+    background: #e6f2fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#small_screen{
+    display: none;
+}
+#inputstyle {
+    font-family: Arial;
+    font-size: 14px;
+}
+
+div {
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#header {
+    background: #186191;
+    height: 100px;
+}
+
+#logo {
+    width: 80px;
+    position: relative;
+    left: 80px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+#app {
+    margin: 0 auto;
+    width: 500px;
+    background-color: white;
+    height: 230px;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+#signout {
+    font-size: medium;
+    position: absolute;
+    background-color: white;
+    border-radius: 15px;
+    height: 5vh;
+    right:40px;
+    top: 50px;
+}
+
+.descriptor {
+    color: #3e7497;
+}
+#icon1, #icon2, #icon3{
+    width: 250px;
+}
+
+tr{
+    text-align: center;
+    height: 100%;
+}
+
+@media screen and (max-width:800px){
+    #signout{
+        background-color: white;
+        border-radius: 10px;
+        width: 15vw;
+        height: 5vh;
+        margin-top: -2vh;
+        margin-right: -2vw;
+        position: fixed;
+    }
+    #app{
+        margin-left: 10vw;
+        margin-top: 5vh;
+        margin-right: 15vw;
+        width: 83vw;
+        background-color: white;
+        height: 230px;
+        padding: 25px;
+        border-radius: 25px;
+    }
+    #header{
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 11vh;
+        color: white;
+        text-align: center;
+        margin-top: -1vh;
+    }
+    #logo{
+        width: 80px;
+        left: 50px;
+        position: absolute;
+        top: 5.25vh;
+    }
+    #big_screen{
+        display: none;
+    }
+    #small_screen{
+        display: block;
+        width: 100%;
+        /*padding: 15vw;*/
+        margin-top: -5vh;
+        margin-left: 5vw;
+    }
+    #icon4, #icon5, #icon6{
+        width: 25vw;
+        text-align: center;
+        padding: 5vw;
+    }
+}
